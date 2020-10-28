@@ -510,7 +510,7 @@ where
                 }
             };
 
-            mem::replace(self.as_mut().deref_mut(), next);
+            let _res = mem::replace(self.as_mut().deref_mut(), next);
         }
     }
 }
