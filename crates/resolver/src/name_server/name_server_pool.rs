@@ -328,11 +328,7 @@ pub enum Local {
 
 impl Local {
     fn is_local(&self) -> bool {
-        if let Local::ResolveFuture(..) = *self {
-            true
-        } else {
-            false
-        }
+        matches!(self, Local::ResolveFuture(..))
     }
 
     /// Takes the future

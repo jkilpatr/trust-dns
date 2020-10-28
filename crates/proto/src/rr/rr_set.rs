@@ -288,7 +288,7 @@ impl RecordSet {
             RecordType::SOA => {
                 assert!(self.records.len() <= 1);
 
-                if let Some(soa_record) = self.records.iter().next() {
+                if let Some(soa_record) = self.records.get(0) {
                     match soa_record.rdata() {
                         &RData::SOA(ref existing_soa) => {
                             if let RData::SOA(ref new_soa) = *record.rdata() {
@@ -538,10 +538,7 @@ pub enum RrsetRecords<'r> {
 impl<'r> RrsetRecords<'r> {
     /// This is a best effort emptyness check
     pub fn is_empty(&self) -> bool {
-        match *self {
-            RrsetRecords::Empty => true,
-            _ => false,
-        }
+        matches!(self, RrsetRecords::Empty)
     }
 }
 
